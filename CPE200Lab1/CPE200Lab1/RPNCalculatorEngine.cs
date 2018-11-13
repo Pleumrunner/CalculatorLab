@@ -26,29 +26,36 @@ namespace CPE200Lab1
                 {
                     number.Push(text);
                 }
-                else if(isOperator(text) && number.Count >= 2)
+                else if(isOperator(text) && number.Count >= 2) // chack have a number
                 {
-                    seccondOp = number.Pop();
-                    firstOp = number.Pop();
+                    seccondOp = number.Pop(); //if have number than give seccond number = seccondOp
+                    firstOp = number.Pop(); //than give first number = firstOp
                     if(text == "%")
                     {
                         number.Push(firstOp);
                     }
                     number.Push(calculate(text, firstOp, seccondOp));
                 }
-                else if(isOperator2(text) && number.Count >= 1)
+                else try // chack Exception
                 {
                     string num = number.Pop();
                     number.Push(unaryCalculate(text, num));
                 }
-                else
+                catch (Exception)
                 {
                     return "E";
                 }
             }
             if(number.Count == 1)
             {
-                return number.Peek();
+                try // check Exception
+                {
+                    return number.Peek();
+                }
+                catch(Exception)
+                {
+                    return "E";
+                }
             }
             return "E";
         }
